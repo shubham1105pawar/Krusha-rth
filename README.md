@@ -1,4 +1,4 @@
-# Krusha-rth -Dynamic website
+# Krusha-rth -Dynamic website-Using django framework
 website dedicated to farmer
 Admin can easily update crops and pesticides
 one can login and vote pasticides
