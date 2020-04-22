@@ -1,0 +1,52 @@
+{% extends "KrishiGyan/Base.html" %}
+
+ 
+ {% block content %}
+
+ 
+ <p id="p" align="center"> {{msg}} </p>
+
+<!--Carousel Wrapper-->
+<div class="container">
+
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Diseases & Pests</h1>
+
+  <hr class="mt-2 mb-5">
+  <button class="btn btn-success btn-lg " onclick= "location.href= '{% url 'home' %}' ">Back</button>
+
+  <div class="row text-center text-lg-left ">
+    
+    {% for Dis in Diseases %}
+     {% with '/Pesticide/'|add:crop|add:'/'|add:Dis.Disease_Name as result %}
+    <div class="col-lg-4 col-md-4 col-12 mt-3"  onclick= "location.href= '{{result}}' "  >
+       {% endwith %}
+       <div class="card">
+            
+             <img class="img-fluid img-thumbnail" src="{{ Dis.Disease_image.url }}" alt={{Dis.Disease_Name}} style= "width:100%; height:183px">
+         <div class="card-body">
+        
+             
+            <h4 class="card-title">{{Dis.Disease_Name}}</h4> 
+           
+             
+         
+         </div>
+       
+        </div>
+
+
+    </div> 
+ 
+
+     
+   {% endfor %}
+   
+   
+  
+</div>
+
+</div>
+
+
+ 
+   {% endblock content %}

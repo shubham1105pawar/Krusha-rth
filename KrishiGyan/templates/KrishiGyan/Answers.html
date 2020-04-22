@@ -1,0 +1,104 @@
+{% extends "KrishiGyan/Base.html" %}
+
+ 
+ {% block content %}
+ {% load static %}
+
+      <div class="container">
+ 
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0" >Answers From Farmers</h1>
+
+  
+
+  <hr class="mt-1 mb-5" >
+{% if Question %}
+
+ <h3 class="font-weight-light text-center text-lg-left mt-2 mb-2" >Question:</h3>
+
+     {% for Q in Question %}
+
+   <div class="border border-success rounded mt-4 mb-4" >
+     
+      <div class="col-lg-12 col-md-12 col-12 mt-3 " >
+        
+        <div class="row justify-content-between">
+          
+          <div class="col-lg-4">
+            
+            {{Q.CropName}}
+          
+          </div>
+      
+        <div class="col-lg-4">
+      
+           {{Q.date|date:"F d,Y"}}
+    
+        </div>
+  
+       </div>
+
+  <hr class="mt-2 mb-2" id="lo">
+  
+
+  <div id="l" contenteditable="true">{{Q.Questions}}</div> 
+    
+  </div> 
+
+</div>
+   {% endfor %}
+{% endif %}
+
+{% if Answers%}
+<h3 class="font-weight-light text-center text-lg-left mt-2 mb-2" >Comments:</h3>
+
+   {% for A in Answers %}
+     
+     <div class="border border-success rounded mt-4 mb-4" >
+     
+      <div class="col-lg-12 col-md-12 col-12 mt-3 " >
+        
+        <div class="row justify-content-between">
+          
+          <div class="col-lg-4">
+            
+            {{A.UserName}}
+          
+          </div>
+      
+        <div class="col-lg-4">
+      
+           {{A.date|date:"F d,Y"}}
+    
+        </div>
+  
+       </div>
+
+  <hr class="mt-2 mb-2" id="lo">
+  
+
+  <div id="l" contenteditable="true" class="mt-2 mb-3">{{A.Answer}}</div> 
+
+{% if user.is_authenticated and user.email == A.Email %}
+
+<button type="button" class="btn btn-outline-danger ml-5 mb-2 mt-3" onclick= "location.href= '{% url 'ans_del' A.pk %}'">Delete</button>
+
+{% endif %}
+    
+  </div> 
+
+</div>
+
+
+
+ {% endfor %}
+
+  {%else%}
+
+  <h3>!!  Nothing To Show  !!</h3> 
+   {%endif%}
+   
+
+</div>
+
+
+{% endblock content %}

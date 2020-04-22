@@ -1,0 +1,117 @@
+
+ {% extends "KrishiGyan/Base.html" %}
+
+ 
+ {% block content %}
+ {% load static %}
+ <p id="p" align="center"> {{msg}} </p>
+
+  <br>
+ 
+  
+  {% for x in Disease %}
+    
+  <div class="container">
+
+  <div class="page-header">
+    <h1>{{x.Disease_Name}}</h1>
+     <hr class="mt-2 mb-4">
+     {% with '/Disease/'|add:crop as result %}
+   <button type="button" class="btn btn-success" onclick= "location.href= '{{result}}' ">Back</button>
+   {%endwith%}
+  </div>
+  <br>
+  <div class="row">
+
+    <div class="col-md-12">
+      <article id="">
+         
+        <div class="entry-content">
+           <h3>Symptoms :</h3>
+          <p class="lead"> {{x.Disease_Symptoms}} </p>
+          <h3>Cause :</h3>
+          <p class="lead"> {{x.Disease_Cause}} </p>
+          <h3>Management :</h3>
+          <p class="lead"> {{x.Disease_Management}}</p>
+          <br>
+        </div>
+        <footer>
+        </footer>
+      </article>
+      </div>
+      </div>
+</div>
+ 
+  <div class="container">
+  <table id="cart" class="table table-responsive">
+            <thead>
+           
+            <tr class="names">
+              <th style="width:55%">Product</th>
+
+              <th style="width:10%" class="text-right hidden-xs">Upvote</th>
+              <th style="width:10%" class="text-right hidden-xs">DownVote</th>
+              <th style="width:10%" class="text-right hidden-xs">Quantity</th>
+              <th style="width:10%" class="text-right hidden-xs">Price</th>
+              
+               
+              <th style="width:5%"></th>
+            </tr>
+
+          </thead>
+          
+   
+   {% for k, y in Pesticides %}
+ {% with '/Pesticide/'|add:crop|add:"/"|add:x.Disease_Name|add:"/"|add:k.Pesticide_Name|add:"/" as result %}
+        
+           <tbody>
+            
+            <tr class="item">
+              
+              <td data-th="Product">
+                <div class="row">
+                  <div class="col-sm-3 hidden-xs">
+
+                    <img src= "{{ k.Pesticide_image.url }}" alt="Converse" class="img-product img-responsive img-rounded" style= "width:100%; height:183px"/>
+
+                  </div>
+                  
+                  <div class="col-sm-9">
+                    <h4 class="nomargin" >{{k.Pesticide_Name}}</h4>
+                    <p class="hidden-xs">{{k.Pesticide_Detail}}</p>
+                  </div>
+
+                </div>
+
+              </td>
+              <form  method="post" action='{{result}}'>
+                {% csrf_token %}
+
+
+              <td data-th="Size" class="text-right hidden-xs"><button  class="btn-outline-light border-0"   type="submit" name="upvote" value="upvote" ><img src="{% static 'KrishiGyan/UP1.png' %}"><p>{{y.0}}</p></button></td>
+              <td data-th="Size" class="text-right hidden-xs"><button class="btn-outline-light border-0" type="submit" name="downvote" value="downvote" > <img src="{% static 'KrishiGyan/down1.png' %}"><p>{{y.1}}</p></button></td>
+              <td data-th="Size" class="text-right hidden-xs">{{k.Pesticide_Quantity}}</td>
+              <td data-th="Price" class="text-right hidden-xs">{{k.Pesticide_Price}}</td>
+               
+               </form>
+               
+            </tr>
+
+          </tbody>
+
+        
+       
+{% endwith %}
+
+  {% endfor %}
+  
+  
+
+  </table>
+
+  </div>
+  
+  {% endfor %}
+  
+ 
+  {% endblock content %}

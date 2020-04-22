@@ -1,0 +1,49 @@
+{% extends "KrishiGyan/Base.html" %}
+
+ 
+ {% block content %}
+<p id="p" align="center"> {{msg}} </p>
+
+<!--Carousel Wrapper-->
+
+<div class="container">
+ 
+  <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Crops and their Images</h1>
+
+  <hr class="mt-2 mb-5">
+
+  <div class="row text-center text-lg-left ">
+    
+    {% for crop in Crops %}
+     {% with '/Disease/'|add:crop.name as result %}
+    <div class="col-lg-4 col-md-4 col-12 mt-3"  onclick= "location.href= '{{result}}'">
+       {% endwith %}
+       <div class="card">
+            
+            <img class="img-fluid img-thumbnail" src="{{ crop.image.url }}" alt={{crop.name}} style= "width:100%; height:183px">
+         <div class="card-body">
+        
+             
+            <h4 class="card-title">{{crop.name}}</h4> 
+           
+             
+         
+         </div>
+       
+        </div>
+
+
+    </div> 
+ 
+
+     
+  {% endfor %}
+   
+   
+  
+</div>
+
+</div>
+
+ 
+  {% endblock content %}
